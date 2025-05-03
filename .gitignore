@@ -1,0 +1,14 @@
+# Ignore backend env and build
+backend/.env
+backend/node_modules
+backend/dist
+
+# Ignore frontend env and build
+frontend/.env
+frontend/node_modules
+frontend/.next
+frontend/out
+
+# OS and editor files
+.DS_Store
+.env
