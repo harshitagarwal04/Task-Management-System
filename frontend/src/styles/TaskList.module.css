@@ -1,0 +1,33 @@
+.task-list {
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.task-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  list-style: none;
+  transition: box-shadow 0.2s;
+}
+
+.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.in-progress {
+  border-left: 4px solid #0070f3;
+}
+
+.pending {
+  border-left: 4px solid #f5a623;
+}
+
+.task-item button {
+  margin-right: 0.5rem;
+}
