@@ -6,7 +6,19 @@ export class TaskController {
 
     async createTask(req: Request, res: Response) {
         try {
-            const taskData = req.body;
+            const user = (req as any).user;
+            const { title, description, dueDate, priority, status, assignedTo } = req.body;
+
+            const taskData = {
+                title,
+                description,
+                dueDate,
+                priority,
+                status,
+                createdBy: user._id,
+                assignedTo: assignedTo || user._id // default to self if not provided
+            };
+
             const newTask = await this.taskService.createTask(taskData);
             res.status(201).json(newTask);
         } catch (error) {
