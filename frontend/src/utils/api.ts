@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Task } from '../types/tasks';
 
 const API_BASE_URL = 'http://localhost:5050/api';
 
@@ -34,9 +35,18 @@ export const loginUser = async (credentials: Credentials) => {
     return response.data;
 };
 
-export const createTask = async (taskData: TaskData) => {
-    const response = await axios.post(`${API_BASE_URL}/tasks`, taskData);
-    return response.data;
+export const createTask = async (taskData: Omit<Task, '_id' | 'createdBy'>) => {
+  const token = localStorage.getItem('token');
+  const response = await axios.post(
+    `${API_BASE_URL}/tasks`,
+    taskData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
 };
 
 export const getTasks = async () => {
@@ -64,3 +74,11 @@ export async function fetchTasks() {
   if (!res.ok) throw new Error('Failed to fetch tasks');
   return res.json();
 }
+
+export const fetchUsers = async () => {
+  const token = localStorage.getItem('token');
+  const response = await axios.get(`${API_BASE_URL}/users`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
