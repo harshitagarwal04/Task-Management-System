@@ -1,0 +1,65 @@
+.dashboardContainer {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+}
+
+.mainContent {
+  flex-grow: 1; 
+  padding: 2rem;
+  width: 100%;
+}
+
+.addTaskButton {
+  background: #0a50e8;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.addTaskButton:hover {
+  background: #005bb5;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  min-width: 350px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cancelButton {
+  margin-top: 1rem;
+  background: #f44336;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background: #d32f2f;
+}

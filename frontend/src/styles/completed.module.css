@@ -1,0 +1,9 @@
+.completedTasksContainer {
+  display: flex;
+}
+
+.completedTasksMain {
+  margin-left: 200px;
+  padding: 2rem;
+  width: 100%;
+}

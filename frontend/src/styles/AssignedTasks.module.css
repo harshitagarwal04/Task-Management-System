@@ -1,0 +1,55 @@
+.assignedTasksContainer {
+  display: flex;
+  height: 100vh; /* Full height of the viewport */
+  overflow: hidden; /* Prevent content overflow */
+}
+
+.sidebar {
+  width: 200px; /* Fixed width for the sidebar */
+  flex-shrink: 0; /* Prevent the sidebar from shrinking */
+  background-color: #f4f4f4; /* Optional: Add a background color */
+  border-right: 1px solid #ddd; /* Optional: Add a border to separate the sidebar */
+  height: 100%; /* Ensure the sidebar takes the full height */
+}
+
+.assignedTasksMain {
+  flex-grow: 1; /* Allow the main content to take up the remaining space */
+  padding: 2rem;
+  overflow-y: auto; /* Add scrolling if the content overflows */
+  background-color: #fff; /* Optional: Add a background color */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  min-width: 350px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-cancel-button {
+  margin-top: 1rem;
+  background: #f44336;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-cancel-button:hover {
+  background: #d32f2f;
+}
