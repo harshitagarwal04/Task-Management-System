@@ -40,7 +40,9 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboardContainer}>
-      <Sidebar />
+      <div className={styles.sidebar}>
+        <Sidebar />
+      </div>
       <main className={styles.mainContent}>
         <h1>Dashboard</h1>
         <TaskList
