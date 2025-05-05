@@ -54,19 +54,36 @@ export const getTasks = async () => {
     return response.data;
 };
 
-export const updateTask = async (taskId: string, taskData: TaskData) => {
-    const response = await axios.put(`${API_BASE_URL}/tasks/${taskId}`, taskData);
-    return response.data;
+export const updateTask = async (taskId: string, taskData: Partial<Task>) => {
+  const token = localStorage.getItem('token');
+  const response = await axios.put(
+    `${API_BASE_URL}/tasks/${taskId}`,
+    taskData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
 };
 
 export const deleteTask = async (taskId: string) => {
-    const response = await axios.delete(`${API_BASE_URL}/tasks/${taskId}`);
-    return response.data;
+  const token = localStorage.getItem('token');
+  const response = await axios.delete(`${API_BASE_URL}/tasks/${taskId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
 };
 
-export async function fetchTasks() {
+export async function fetchTasks(params?: { createdBy?: string; assignedTo?: string }) {
   const token = localStorage.getItem('token');
-  const res = await fetch(`${API_BASE_URL}/tasks`, {
+  const queryString = params
+    ? '?' + new URLSearchParams(params as Record<string, string>).toString()
+    : '';
+  const res = await fetch(`${API_BASE_URL}/tasks${queryString}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
