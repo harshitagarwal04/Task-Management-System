@@ -3,6 +3,7 @@ import { fetchTasks } from '../../utils/api';
 import { Task } from '../../types/tasks';
 import TaskList from '../../components/TaskList';
 import Sidebar from '../../components/Sidebar';
+import styles from '../../styles/completed.module.css'; // Import the CSS module
 
 const CompletedTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -20,11 +21,16 @@ const CompletedTasks = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div className={styles.completedTasksContainer}>
       <Sidebar />
-      <main style={{ marginLeft: '200px', padding: '2rem', width: '100%' }}>
+      <main className={styles.completedTasksMain}>
         <h1>Completed Tasks</h1>
-        <TaskList tasks={tasks} onDelete={(_id) => {}} onUpdate={(task) => {}} />
+        <TaskList
+          tasks={tasks}
+          onDelete={(_id) => {}}
+          onUpdate={(task) => {}}
+          onMarkComplete={(_id) => {}}
+        />
       </main>
     </div>
   );
