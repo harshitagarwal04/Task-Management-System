@@ -6,9 +6,10 @@ interface TaskListProps {
   tasks: Task[];
   onDelete: (_id: string) => void;
   onUpdate: (task: Task) => void;
+  onMarkComplete: (_id: string) => void; // New prop for marking tasks as complete
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate }) => {
+const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate, onMarkComplete }) => {
   return (
     <div className={styles['task-list']}>
       <h2>Task List</h2>
@@ -25,6 +26,10 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate }) => {
               <p>Status: {task.status}</p>
               <button onClick={() => onUpdate(task)}>Edit</button>
               <button onClick={() => onDelete(task._id)}>Delete</button>
+              {/* Show "Mark as Complete" button only if the task is not already completed */}
+              {task.status !== 'completed' && (
+                <button onClick={() => onMarkComplete(task._id)}>Mark as Complete</button>
+              )}
             </li>
           ))}
         </ul>
@@ -34,3 +39,11 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate }) => {
 };
 
 export default TaskList;
+
+// Usage example (this part is not in the component file, just an illustration)
+// <TaskList
+//   tasks={tasks}
+//   onDelete={() => {}}
+//   onUpdate={() => {}}
+//   onMarkComplete={handleMarkComplete}
+// />

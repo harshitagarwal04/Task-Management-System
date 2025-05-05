@@ -24,7 +24,11 @@ interface TaskFormProps {
 const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users }) => {
     const [title, setTitle] = useState(initialTask ? initialTask.title : '');
     const [description, setDescription] = useState(initialTask ? initialTask.description : '');
-    const [dueDate, setDueDate] = useState(initialTask ? initialTask.dueDate : '');
+    const [dueDate, setDueDate] = useState(
+      initialTask?.dueDate
+        ? initialTask.dueDate.slice(0, 10) // Converts "2024-05-06T00:00:00.000Z" to "2024-05-06"
+        : ''
+    );
     const [priority, setPriority] = useState<'low' | 'medium' | 'high'>(initialTask ? initialTask.priority : 'medium');
     const [status, setStatus] = useState<'pending' | 'in-progress' | 'completed'>(initialTask ? initialTask.status : 'pending');
     const [assignedTo, setAssignedTo] = useState(initialTask?.assignedTo || (users[0]?._id ?? ''));
@@ -69,7 +73,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users }) => 
                 <input
                     type="date"
                     value={dueDate}
-                    onChange={(e) => setDueDate(e.target.value)}
+                    onChange={e => setDueDate(e.target.value)}
                     required
                 />
             </div>
