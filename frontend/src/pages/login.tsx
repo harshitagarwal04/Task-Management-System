@@ -1,53 +1,59 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { loginUser } from '../utils/api';
 
-const API_URL = 'http://localhost:5050/api/auth/login';
+const Login: React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
-const Login = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const router = useRouter();
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
 
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post(API_URL, { username, password });
-            localStorage.setItem('token', response.data.token);
-            router.push('/dashboard');
-        } catch (err: any) {
-            setError(err.response?.data?.message || 'Invalid username or password');
-        }
-    };
+    try {
+      const { token } = await loginUser({ username, password });
+      localStorage.setItem('token', token);
+      window.location.href = '/dashboard'; // Redirect to the dashboard after successful login
+    } catch (err: any) {
+      setError(err.message || 'Invalid username or password');
+    }
+  };
 
-    return (
+  const handleResetPassword = () => {
+    console.log('Redirecting to reset password page...');
+    window.location.href = '/ResetPassword'; // Redirect to the reset password page
+  };
+
+  return (
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleLogin}>
         <div>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">Login</button>
-            </form>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
         </div>
-    );
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <button type="submit">Login</button>
+      </form>
+      <button onClick={handleResetPassword}>Forgot Password?</button>
+    </div>
+  );
 };
 
 export default Login;

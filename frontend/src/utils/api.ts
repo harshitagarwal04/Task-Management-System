@@ -99,3 +99,62 @@ export const fetchUsers = async () => {
   });
   return response.data;
 };
+
+export const getUserProfile = async () => {
+  const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+  const response = await fetch('http://localhost:5050/api/profile', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`, // Add the Authorization header
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch profile');
+  }
+  return response.json();
+};
+
+export const updateUserProfile = async (profile: { name: string; email: string; password?: string }) => {
+  const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+  const response = await fetch('http://localhost:5050/api/profile', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`, // Add the Authorization header
+    },
+    body: JSON.stringify(profile),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to update profile');
+  }
+  return response.json();
+};
+
+export const resetPassword = async ({ email, newPassword }: { email: string; newPassword: string }) => {
+  const response = await fetch('http://localhost:5050/api/password/reset', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, newPassword }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to reset password');
+  }
+};
+
+export const changePassword = async ({ currentPassword, newPassword }: { currentPassword: string; newPassword: string }) => {
+  const token = localStorage.getItem('token');
+  const response = await fetch('http://localhost:5050/api/password/change', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ currentPassword, newPassword }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Failed to change password');
+  }
+};
