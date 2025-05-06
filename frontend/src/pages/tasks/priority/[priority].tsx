@@ -4,6 +4,7 @@ import { fetchTasks, updateTask } from '../../../utils/api';
 import { Task } from '../../../types/tasks';
 import TaskList from '../../../components/TaskList';
 import Sidebar from '../../../components/Sidebar';
+import { getCurrentUserId } from '../../../utils/auth';
 
 const TasksByPriority = () => {
   const router = useRouter();
@@ -13,12 +14,26 @@ const TasksByPriority = () => {
 
   useEffect(() => {
     const loadTasks = async () => {
-      if (typeof priority === 'string') {
-        const allTasks = await fetchTasks();
-        setTasks(allTasks.filter((task: Task) => task.priority === priority));
+      try {
+        if (typeof priority !== 'string') return;
+
+        const userId = getCurrentUserId();
+        if (!userId) {
+          console.error('No user is logged in.');
+          setLoading(false);
+          return;
+        }
+        const allUserTasks = await fetchTasks({ assignedTo: userId });
+        const filteredByPriority = allUserTasks.filter((task: Task) => task.priority === priority);
+
+        setTasks(filteredByPriority);
+      } catch (err) {
+        console.error('Failed to load tasks by priority:', err);
+      } finally {
         setLoading(false);
       }
     };
+
     if (priority) loadTasks();
   }, [priority]);
 
@@ -27,7 +42,6 @@ const TasksByPriority = () => {
       const taskToUpdate = tasks.find(task => task._id === _id);
       if (!taskToUpdate) return;
 
-      // Update the task's status to "completed"
       await updateTask(_id, { ...taskToUpdate, status: 'completed' });
       setTasks(tasks.map(task => (task._id === _id ? { ...task, status: 'completed' } : task)));
     } catch (err) {

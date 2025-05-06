@@ -3,7 +3,8 @@ import { fetchTasks } from '../../utils/api';
 import { Task } from '../../types/tasks';
 import TaskList from '../../components/TaskList';
 import Sidebar from '../../components/Sidebar';
-import styles from '../../styles/completed.module.css'; // Import the CSS module
+import { getCurrentUserId } from '../../utils/auth'; // <-- ADD THIS
+import styles from '../../styles/completed.module.css';
 
 const CompletedTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -11,9 +12,25 @@ const CompletedTasks = () => {
 
   useEffect(() => {
     const loadTasks = async () => {
-      const allTasks = await fetchTasks();
-      setTasks(allTasks.filter((task: Task) => task.status === 'completed'));
-      setLoading(false);
+      try {
+        const userId = getCurrentUserId(); // <-- GET CURRENT USER ID
+        if (!userId) {
+          console.error('No user is logged in.');
+          setLoading(false);
+          return;
+        }
+
+        // Fetch only tasks assigned to the current user
+        const userTasks = await fetchTasks({ assignedTo: userId });
+        // Filter by "completed" status
+        const completedTasks = userTasks.filter((task: Task) => task.status === 'completed');
+
+        setTasks(completedTasks);
+      } catch (err) {
+        console.error('Failed to fetch completed tasks', err);
+      } finally {
+        setLoading(false);
+      }
     };
     loadTasks();
   }, []);
@@ -27,9 +44,9 @@ const CompletedTasks = () => {
         <h1>Completed Tasks</h1>
         <TaskList
           tasks={tasks}
-          onDelete={(_id) => {}}
-          onUpdate={(task) => {}}
-          onMarkComplete={(_id) => {}}
+          onDelete={() => {}}
+          onUpdate={() => {}}
+          onMarkComplete={() => {}}
         />
       </main>
     </div>

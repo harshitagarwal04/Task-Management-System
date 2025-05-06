@@ -12,9 +12,9 @@ const AssignedTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<{ _id: string; username: string }[]>([]);
-  const [showAddModal, setShowAddModal] = useState(false); // State for Add Task modal
-  const [showEditModal, setShowEditModal] = useState(false); // State for Edit Task modal
-  const [editingTask, setEditingTask] = useState<Task | null>(null); // Task being edited
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
 
   // Fetch the current user's ID
   useEffect(() => {
@@ -72,7 +72,7 @@ const AssignedTasks = () => {
   const handleDelete = async (_id: string) => {
     try {
       await deleteTask(_id);
-      setTasks(tasks.filter(task => task._id !== _id)); // Remove the deleted task from the list
+      setTasks(tasks.filter(task => task._id !== _id));
     } catch (err) {
       alert('Failed to delete task.');
     }
@@ -81,9 +81,9 @@ const AssignedTasks = () => {
   // Handle adding a new task
   const handleAddTask = async (newTask: Partial<Task>) => {
     try {
-      const createdTask = await createTask(newTask as Task); // Cast to Task for backend
-      setTasks([...tasks, createdTask]); // Add the new task to the list
-      setShowAddModal(false); // Close the modal
+      const createdTask = await createTask(newTask as Task);
+      setTasks([...tasks, createdTask]);
+      setShowAddModal(false);
     } catch (err) {
       alert('Failed to add task.');
     }
@@ -91,20 +91,20 @@ const AssignedTasks = () => {
 
   // Handle opening the edit modal
   const handleUpdate = (task: Task) => {
-    setEditingTask(task); // Set the task to be edited
-    setShowEditModal(true); // Open the edit modal
+    setEditingTask(task);
+    setShowEditModal(true);
   };
 
   // Handle editing a task
   const handleEditTask = async (updatedTask: Partial<Task>) => {
     try {
       if (editingTask) {
-        const { _id } = editingTask; // Destructure `_id` from `editingTask`
-        const taskWithId = { ...editingTask, ...updatedTask, _id }; // Merge to ensure all required fields
+        const { _id } = editingTask;
+        const taskWithId = { ...editingTask, ...updatedTask, _id };
         await updateTask(editingTask._id, taskWithId);
-        setTasks(tasks.map(task => (task._id === _id ? taskWithId : task))); // Use `_id` directly
-        setShowEditModal(false); // Close the modal
-        setEditingTask(null); // Clear the editing task
+        setTasks(tasks.map(task => (task._id === _id ? taskWithId : task)));
+        setShowEditModal(false);
+        setEditingTask(null);
       }
     } catch (err) {
       alert('Failed to update task.');
@@ -122,7 +122,7 @@ const AssignedTasks = () => {
         <h1>Assigned Tasks</h1>
         <button
           className={styles.addTaskButton}
-          onClick={() => setShowAddModal(true)} // Open the Add Task modal
+          onClick={() => setShowAddModal(true)}
         >
           + Add Task
         </button>
@@ -130,19 +130,19 @@ const AssignedTasks = () => {
           tasks={tasks}
           onDelete={handleDelete}
           onMarkComplete={handleMarkComplete}
-          onUpdate={handleUpdate} // Pass the handleUpdate function to TaskList
+          onUpdate={handleUpdate}
         />
         {showAddModal && (
           <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
               <h2>Add Task</h2>
               <TaskForm
-                users={users} // Pass the user list to TaskForm
-                onSubmit={handleAddTask} // Handle adding a new task
+                users={users}
+                onSubmit={handleAddTask}
               />
               <button
                 className={styles.modalCancelButton}
-                onClick={() => setShowAddModal(false)} // Close the modal
+                onClick={() => setShowAddModal(false)}
               >
                 Cancel
               </button>
@@ -154,15 +154,15 @@ const AssignedTasks = () => {
             <div className={styles.modalContent}>
               <h2>Edit Task</h2>
               <TaskForm
-                users={users} // Pass the user list to TaskForm
-                initialTask={editingTask || undefined} // Pass the task being edited
-                onSubmit={handleEditTask} // Handle editing the task
+                users={users}
+                initialTask={editingTask || undefined}
+                onSubmit={handleEditTask}
               />
               <button
                 className={styles.modalCancelButton}
                 onClick={() => {
-                  setShowEditModal(false); // Close the modal
-                  setEditingTask(null); // Clear the editing task
+                  setShowEditModal(false);
+                  setEditingTask(null);
                 }}
               >
                 Cancel
