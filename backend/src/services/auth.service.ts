@@ -1,4 +1,4 @@
-import User from '../models/user.model';
+import User, { IUser } from '../models/user.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -18,10 +18,14 @@ export class AuthService {
     async login({ username, password }: { username: string; password: string }) {
         const user = await User.findOne({ username });
         if (!user) {
+            // console.log('User not found');
+            console.error('User not found');
             throw new Error('Invalid username or password');
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
+            // console.log('Password not found');
+            console.error('Password mismatch');
             throw new Error('Invalid username or password');
         }
         const token = jwt.sign(
@@ -32,3 +36,8 @@ export class AuthService {
         return token;
     }
 }
+
+export const findUserByUsername = async (username: string): Promise<IUser | null> => {
+  const user = await User.findOne({ username }) as IUser; // Cast the result to IUser
+  return user;
+};

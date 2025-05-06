@@ -5,6 +5,9 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
 import taskRoutes from './routes/task.routes';
 import userRoutes from './routes/user.routes';
+import profileRoutes from './routes/prof.routes'; // Import the profile route
+import passwordRoutes from './routes/password.routes'; // Import the password reset route
+import changePasswordRoutes from './routes/changePassword.routes'; // Import the change password routes
 import cors from 'cors';
 
 dotenv.config();
@@ -21,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/task_management', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-} as mongoose.ConnectOptions) // Add type assertion for TypeScript
+} as mongoose.ConnectOptions)
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 
@@ -29,6 +32,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/task_mana
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/profile', profileRoutes);
+app.use('/api/password', passwordRoutes);
+app.use('/api/password', changePasswordRoutes); // Use the change password routes
 
 // Start server
 app.listen(PORT, () => {
