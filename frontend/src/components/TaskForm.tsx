@@ -16,12 +16,13 @@ interface Task {
 }
 
 interface TaskFormProps {
-  onSubmit: (task: Partial<Task>) => void; // Accept Partial<Task> for adding new tasks
+  onSubmit: (task: Partial<Task>) => void;
   initialTask?: Task;
   users: User[];
+  disableFields?: string[]; // Array of field names to disable
 }
 
-const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users }) => {
+const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users, disableFields = [] }) => {
   const [title, setTitle] = useState(initialTask ? initialTask.title : '');
   const [description, setDescription] = useState(initialTask ? initialTask.description : '');
   const [dueDate, setDueDate] = useState(
@@ -52,6 +53,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users }) => 
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          disabled={disableFields.includes('title')} // Disable if specified
           required
         />
       </div>
@@ -61,6 +63,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users }) => 
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          disabled={disableFields.includes('description')} // Disable if specified
           required
         />
       </div>
@@ -71,6 +74,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users }) => 
           type="date"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
+          disabled={disableFields.includes('dueDate')} // Disable if specified
           required
         />
       </div>
@@ -80,6 +84,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users }) => 
           id="priority"
           value={priority}
           onChange={(e) => setPriority(e.target.value as 'low' | 'medium' | 'high')}
+          disabled={disableFields.includes('priority')} // Disable if specified
         >
           <option value="low">Low</option>
           <option value="medium">Medium</option>
@@ -92,6 +97,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users }) => 
           id="status"
           value={status}
           onChange={(e) => setStatus(e.target.value as 'pending' | 'in-progress' | 'completed')}
+          disabled={disableFields.includes('status')} // Disable if specified
         >
           <option value="pending">Pending</option>
           <option value="in-progress">In Progress</option>
@@ -104,6 +110,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialTask, users }) => 
           id="assignedTo"
           value={assignedTo}
           onChange={(e) => setAssignedTo(e.target.value)}
+          disabled={disableFields.includes('assignedTo')} // Disable if specified
           required
         >
           {users.map((user) => (
