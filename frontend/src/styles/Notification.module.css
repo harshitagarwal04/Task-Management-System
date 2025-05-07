@@ -6,16 +6,16 @@
 }
 
 .success {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #3b5738; /* Slightly darker green for dark theme */
+  color: #c8e6c9;
 }
 
 .error {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: #5f3b3b; /* Dark red-brown for dark theme */
+  color: #f8d7da;
 }
 
 .info {
-  background-color: #cce5ff;
-  color: #004085;
+  background-color: #3b4a5f; /* Dark bluish for dark theme */
+  color: #cce5ff;
 }

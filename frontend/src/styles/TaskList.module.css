@@ -1,18 +1,20 @@
 .task-list {
   padding: 1rem;
-  background: #f9f9f9;
+  background: #2b2b2b; /* Dark gray */
   border-radius: 8px;
   margin-bottom: 2rem;
+  color: #fff; /* White text */
 }
 
 .task-item {
-  background: #fff;
-  border: 1px solid #ddd;
+  background: #3b3b3b; /* Slightly lighter dark gray */
+  border: 1px solid #444;
   border-radius: 4px;
   margin-bottom: 1rem;
   padding: 1rem;
   list-style: none;
   transition: box-shadow 0.2s;
+  color: #fff;
 }
 
 .completed {
@@ -21,13 +23,23 @@
 }
 
 .in-progress {
-  border-left: 4px solid #0070f3;
+  border-left: 4px solid #d15800; /* Dark orange accent */
 }
 
 .pending {
-  border-left: 4px solid #f5a623;
+  border-left: 4px solid #d15800; /* Dark orange accent */
 }
 
 .task-item button {
   margin-right: 0.5rem;
+  background: #d15800; /* Dark orange */
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task-item button:hover {
+  background: #b34700; /* Slightly darker orange on hover */
 }

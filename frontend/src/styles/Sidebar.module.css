@@ -1,5 +1,5 @@
 .navbar {
-  background: #0070f3;
+  background: #2b2b2b;
   padding: 1rem 0;
   margin-bottom: 2rem;
 }
@@ -25,13 +25,13 @@
 }
 
 .navbar a:hover {
-  color: #f5a623;
+  color: #d15800; /* Dark orange */
 }
 
 .sidebar {
   width: 175px;
   height: 100vh;
-  background: #0070f3;
+  background: #2b2b2b; /* Dark gray */
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -70,6 +70,10 @@
   cursor: pointer;
 }
 
+.priorityButton:hover {
+  color: #d15800;
+}
+
 .priorityDropdown {
   margin-left: 1rem;
   margin-top: 0.5rem;
@@ -78,13 +82,18 @@
 .priorityDropdown div {
   cursor: pointer;
   margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.priorityDropdown div:hover {
+  color: #d15800;
 }
 
 .signOutButton {
   margin-top: auto;
   margin-bottom: auto;
   background: #fff;
-  color: #0070f3;
+  color: #2b2b2b;
   border: none;
   border-radius: 4px;
   padding: 0.5rem 1rem;

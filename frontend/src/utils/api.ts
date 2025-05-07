@@ -89,7 +89,17 @@ export async function fetchTasks(params?: { createdBy?: string; assignedTo?: str
     },
   });
   if (!res.ok) throw new Error('Failed to fetch tasks');
-  return res.json();
+
+  // 1. Parse the JSON data
+  const tasks: Task[] = await res.json();
+
+  // 2. Sort tasks by ascending 'dueDate'
+  tasks.sort((a, b) => {
+    return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+  });
+
+  // 3. Return the sorted array
+  return tasks;
 }
 
 export const fetchUsers = async () => {
