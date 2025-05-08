@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../styles/Sidebar.module.css'; // Import the CSS module
+import styles from '../styles/Sidebar.module.css'; 
 
 const Sidebar: React.FC = () => {
   const router = useRouter();

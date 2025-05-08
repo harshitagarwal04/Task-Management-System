@@ -164,7 +164,7 @@ const AssignedTasks = () => {
             className={styles.filterSelect}
           />
         </div>
-        {/* Search Bar and Add Task */}
+
         <div>
           <input
             type="text"

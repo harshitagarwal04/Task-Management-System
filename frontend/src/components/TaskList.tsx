@@ -39,15 +39,12 @@ const TaskList: React.FC<TaskListProps> = ({
             <li key={task._id} className={`${styles['task-item']} ${styles[task.status]}`}>
               <h3>{task.title}</h3>
 
-              {/* Scrollable description */}
               <p className={styles['task-description']}>{task.description}</p>
 
-              {/* Other fields (date, priority, etc.) */}
               <p>Due Date: {new Date(task.dueDate).toLocaleDateString()}</p>
               <p>Priority: {task.priority}</p>
               <p>Status: {task.status}</p>
 
-              {/* Footer for buttons */}
               <div className={styles['task-footer']}>
                 {showCompleteButton && (
                   <button onClick={() => onMarkComplete(task._id)}>Mark as Complete</button>
@@ -79,11 +76,3 @@ const TaskList: React.FC<TaskListProps> = ({
 };
 
 export default TaskList;
-
-// Usage example (this part is not in the component file, just an illustration)
-// <TaskList
-//   tasks={tasks}
-//   onDelete={() => {}}
-//   onUpdate={() => {}}
-//   onMarkComplete={handleMarkComplete}
-// />

@@ -23,10 +23,9 @@
 }
 
 .sidebar a:hover {
-  color: #d15800; /* Keep the existing orange hover */
+  color: #d15800; 
 }
 
-/* Specific link overrides (if needed) */
 .sidebar a.dashboardLink {
   margin-top: 7rem;
 }
@@ -36,7 +35,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* Priority button & dropdown */
 .priorityButton {
   background: none;
   border: none;
@@ -69,7 +67,6 @@
   color: #d15800;
 }
 
-/* The sign-out button at the bottom */
 .signOutButton {
   margin-top: auto;
   margin-bottom: 4rem;

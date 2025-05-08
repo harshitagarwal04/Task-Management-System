@@ -1,24 +1,22 @@
 .task-list {
   padding: 1rem;
-  background: #2b2b2b; /* Dark gray */
+  background: #2b2b2b; 
   border-radius: 8px;
   margin-bottom: 2rem;
-  color: #fff; /* White text */
+  color: #fff; 
   margin: 0 auto;
-  font-family: 'Arial', sans-serif; /* Or any other font family */
+  font-family: 'Arial', sans-serif; 
 }
 
-/* Display the list as a flex container with wrapping */
 .task-list ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem; /* Spacing between cards */
+  gap: 1rem; 
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Each task card occupies one-third of a row */
 .task-item {
   flex: 0 0 calc((100% / 3) - 1rem);
   box-sizing: border-box;
@@ -29,11 +27,10 @@
   color: #fff;
   transition: box-shadow 0.2s;
   display: flex;
-  flex-direction: column; /* Stack contents vertically */
-  height: 320px;          /* Consistent card height */
+  flex-direction: column; 
+  height: 320px;
 }
 
-/* Scrollable description area */
 .task-description {
   flex: 1;                 /* Fills the extra vertical space */
   overflow-y: auto;        /* Scroll if too long */
@@ -57,7 +54,6 @@
   color: #f0f0f0; /* Light grayish white */
 }
 
-/* Example “header” area for due date at the top-right */
 .task-header {
   display: flex;
   justify-content: space-between;
@@ -67,32 +63,29 @@
 
 .task-dueDate {
   font-size: 0.9rem;
-  color: #cccccc; /* Slightly lighter text */
+  color: #cccccc; 
 }
 
-/* Optional styling for other text sections */
 .task-meta {
   font-size: 0.9rem;
   margin: 0.3rem 0;
 }
 
-/* Completed / In-Progress / Pending badges */
 .completed {
   opacity: 0.6;
   text-decoration: line-through;
 }
 
 .in-progress {
-  border-left: 4px solid #d15800; /* Dark orange accent */
+  border-left: 4px solid #d15800; 
 }
 
 .pending {
-  border-left: 4px solid #d15800; /* Dark orange accent */
+  border-left: 4px solid #d15800; 
 }
 
-/* Buttons */
 .task-item button {
-  background: #d15800; /* Dark orange */
+  background: #d15800; 
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;
@@ -101,11 +94,5 @@
 }
 
 .task-item button:hover {
-  background: #b34700; /* Slightly darker orange on hover */
+  background: #b34700; 
 }
-
-/* Optional: add a fixed height to create squares
-.task-item {
-  height: 250px;
-}
-*/

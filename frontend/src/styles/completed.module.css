@@ -8,7 +8,6 @@
   width: 100%;
 }
 
-/* Use this in your CSS module */
 .completedText {
   text-decoration: line-through;
   opacity: 0.6;

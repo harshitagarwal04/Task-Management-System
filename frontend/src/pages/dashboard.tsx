@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar';
 import TaskList from '../components/TaskList';
 import { Task } from '../types/tasks';
 import { fetchTasks, updateTask } from '../utils/api';
-import { getCurrentUserId } from '../utils/auth'; // Make sure this utility is imported
+import { getCurrentUserId } from '../utils/auth'; 
 import TaskForm from '../components/TaskForm';
 import styles from '../styles/dashboard.module.css';
 
@@ -72,7 +72,6 @@ const Dashboard = () => {
     }
   };
 
-  // Filter overdue tasks (not completed, due date in the past)
   const now = new Date();
   const overdueTasks = tasks.filter(
     (task) =>
@@ -179,7 +178,6 @@ const Dashboard = () => {
           </section>
         )}
 
-        {/* Main Task List */}
         <TaskList
           tasks={nonOverdueTasks}
           onDelete={() => {}}

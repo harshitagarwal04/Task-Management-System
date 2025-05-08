@@ -7,7 +7,7 @@ interface UserProfile {
   username: string; // Non-editable
   name?: string; // Editable
   email: string;
-  password?: string; // Optional for updating
+  password?: string; 
 }
 
 const Profile = () => {

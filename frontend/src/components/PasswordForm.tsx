@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface PasswordFormProps {
-  mode: 'reset' | 'change'; // 'reset' for forgot password, 'change' for profile page
+  mode: 'reset' | 'change'; 
   onSubmit: (data: { currentPassword?: string; newPassword: string }) => Promise<void>;
 }
 
