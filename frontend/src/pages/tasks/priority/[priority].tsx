@@ -24,7 +24,10 @@ const TasksByPriority = () => {
           return;
         }
         const allUserTasks = await fetchTasks({ assignedTo: userId });
-        const filteredByPriority = allUserTasks.filter((task: Task) => task.priority === priority);
+        // Filter by priority AND exclude completed tasks
+        const filteredByPriority = allUserTasks.filter(
+          (task: Task) => task.priority === priority && task.status !== 'completed'
+        );
 
         setTasks(filteredByPriority);
       } catch (err) {
