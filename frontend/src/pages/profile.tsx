@@ -119,6 +119,7 @@ const Profile = () => {
               value={profile.email || ''}
               onChange={handleInputChange}
               className={styles.formInput}
+              disabled
             />
           </div>
           <button type="submit" className={styles.submitButton}>
