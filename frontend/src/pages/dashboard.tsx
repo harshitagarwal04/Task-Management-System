@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Sidebar from '../components/Sidebar';
+import TaskList from '../components/TaskList';
 import { Task } from '../types/tasks';
 import { fetchTasks, updateTask } from '../utils/api';
 import { getCurrentUserId } from '../utils/auth'; // Make sure this utility is imported
-import TaskList from '../components/TaskList';
-import Sidebar from '../components/Sidebar';
 import TaskForm from '../components/TaskForm';
 import styles from '../styles/dashboard.module.css';
 
@@ -68,6 +68,17 @@ const Dashboard = () => {
     }
   };
 
+  // Filter overdue tasks (not completed, due date in the past)
+  const now = new Date();
+  const overdueTasks = tasks.filter(
+    (task) => task.status !== 'completed' && new Date(task.dueDate) < now
+  );
+
+  // Filter non-overdue tasks
+  const nonOverdueTasks = tasks.filter(
+    (task) => !(task.status !== 'completed' && new Date(task.dueDate) < now)
+  );
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -76,9 +87,45 @@ const Dashboard = () => {
         <Sidebar />
       </div>
       <main className={styles.mainContent}>
-        <h1>Dashboard</h1>
+        {/* Overdue Tasks Section */}
+        {overdueTasks.length > 0 && (
+          <section className={styles.overdueSection}>
+            <h2 className={styles.overdueTitle}>Overdue Tasks</h2>
+            <ul className={styles.overdueTasksList}>
+              {overdueTasks.map(task => (
+                <li key={task._id} className={styles.overdueTaskCard}>
+                  <h3>{task.title}</h3>
+                  <p className={styles['task-description']}>{task.description}</p>
+                  <p>Due Date: {new Date(task.dueDate).toLocaleDateString()}</p>
+                  <p>Priority: {task.priority}</p>
+                  <p>Status: {task.status}</p>
+                  <div className={styles['task-footer']}>
+                    <button onClick={() => handleMarkComplete(task._id)}>
+                      Mark as Complete
+                    </button>
+                    <button onClick={() => handleUpdate(task)}>
+                      {/* Pen icon */}
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        style={{ verticalAlign: 'middle' }}
+                      >
+                        <path d="M11.013 1.427a1.45 1.45 0 012.05 2.05l-.97.97-2.05-2.05.97-.97zM1 11.488l7.116-7.116 2.05 2.05L3.05 13.538H1v-2.05z" />
+                      </svg>
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Main Task List */}
         <TaskList
-          tasks={tasks}
+          tasks={nonOverdueTasks}
           onDelete={() => {}}
           onUpdate={handleUpdate}
           onMarkComplete={handleMarkComplete}
