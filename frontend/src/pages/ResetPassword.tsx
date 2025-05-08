@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { resetPassword } from '../utils/api';
+import styles from '../styles/Resetpassword.module.css';
 
 const ResetPassword: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -21,31 +22,27 @@ const ResetPassword: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.resetContainer}>
       <h1>Reset Password</h1>
-      <form onSubmit={handleResetPassword}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="newPassword">New Password:</label>
-          <input
-            type="password"
-            id="newPassword"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
-        {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}
+      <form className={styles.resetForm} onSubmit={handleResetPassword}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <label htmlFor="newPassword">New Password</label>
+        <input
+          type="password"
+          id="newPassword"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          required
+        />
+        {error && <div className={styles.resetError}>{error}</div>}
+        {successMessage && <div className={styles.resetSuccess}>{successMessage}</div>}
         <button type="submit">Reset Password</button>
       </form>
     </div>

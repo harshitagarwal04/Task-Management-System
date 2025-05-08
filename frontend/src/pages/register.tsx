@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import styles from '../styles/register.module.css';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -16,7 +17,7 @@ const Register = () => {
         setSuccess('');
 
         try {
-            const response = await axios.post('http://localhost:5050/api/auth/register', {
+            await axios.post('http://localhost:5050/api/auth/register', {
                 username,
                 email,
                 password,
@@ -31,39 +32,36 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className={styles.registerContainer}>
             <h1>Register</h1>
-            <form onSubmit={handleRegister}>
-                <div>
-                    <label>Username</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
+            <form className={styles.registerForm} onSubmit={handleRegister}>
+                <label>Username</label>
+                <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
+                <label>Email</label>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <label>Password</label>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
                 <button type="submit">Register</button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                {success && <p style={{ color: 'green' }}>{success}</p>}
+                <button className={styles.loginRedirectButton} onClick={() => router.push('/login')}>
+                    Already have an account? Login
+                </button>
+                {error && <p className={styles.registerError}>{error}</p>}
+                {success && <p style={{ color: '#4caf50', textAlign: 'center' }}>{success}</p>}
             </form>
         </div>
     );

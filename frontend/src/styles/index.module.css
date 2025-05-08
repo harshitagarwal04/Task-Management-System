@@ -1,0 +1,42 @@
+.homeContainer {
+  min-height: 100vh;
+  background: #232323;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.homeTitle {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.homeSubtitle {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+.homeButtonGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.homeButton {
+  background: #d15800;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.homeButton:hover {
+  background: #b34700;
+}

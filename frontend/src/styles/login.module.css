@@ -1,0 +1,90 @@
+.loginContainer {
+  min-height: 100vh;
+  background: #232323;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.loginForm {
+  background: #2b2b2b;
+  padding: 2rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  min-width: 320px;
+}
+
+.loginForm label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.loginForm input {
+  padding: 0.6rem;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #3b3b3b;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.loginForm button {
+  background: #d15800;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: background 0.2s;
+}
+
+.loginForm button:hover {
+  background: #b34700;
+  
+}
+
+.loginError {
+  color: #f44336;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.resetpasswordLink {
+  color: #d15800;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+.resetpasswordLink:hover {
+  text-decoration: underline;
+}
+
+.registerRedirectButton {
+  background: #d15800;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 1rem auto 0 auto; /* Center horizontally, margin-top: 1rem */
+  transition: background 0.2s;
+  display: block;
+  width: auto; /* Restrict width to content */
+  min-width: 160px; /* Optional: set a minimum width for better appearance */
+}
+
+.registerRedirectButton:hover {
+  background: #b34700;
+  color: #232323;
+  text-decoration: underline;
+}
