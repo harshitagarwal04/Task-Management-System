@@ -83,3 +83,26 @@
   color: #4caf50;
   margin-bottom: 10px;
 }
+
+.backButtonContainer {
+  margin-bottom: 1rem;
+  /* optional: align the button to the left or center
+     text-align: left;
+  */
+}
+
+.goBackButton {
+  background: #d15800;      /* White background */
+  color: #ffffff;        /* Dark gray text */
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.goBackButton:hover {
+  background: #a54602;  /* Keep orange hover */
+  color: #fff;
+}

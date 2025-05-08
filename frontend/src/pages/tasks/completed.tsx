@@ -19,7 +19,6 @@ const CompletedTasks = () => {
           setLoading(false);
           return;
         }
-
         const userTasks = await fetchTasks({ assignedTo: userId });
         const completedTasks = userTasks.filter((task: Task) => task.status === 'completed');
         setTasks(completedTasks);
@@ -41,12 +40,12 @@ const CompletedTasks = () => {
         <h1>Completed Tasks</h1>
         <TaskList
           tasks={tasks}
-          onDelete={() => { } }
-          onUpdate={() => { } }
+          onDelete={() => {}}
+          onUpdate={() => {}}
           showEditButton={false}
-          showCompleteButton={false} 
-          onMarkComplete={() => { } }        
-          />
+          showCompleteButton={false}
+          onMarkComplete={() => {}}
+        />
       </main>
     </div>
   );

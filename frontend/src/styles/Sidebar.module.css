@@ -1,37 +1,7 @@
-.navbar {
-  background: #2b2b2b;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-}
-
-.navbar ul {
-  display: flex;
-  list-style: none;
-  justify-content: center;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar li {
-  font-size: 1.1rem;
-}
-
-.navbar a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.navbar a:hover {
-  color: #d15800; /* Dark orange */
-}
-
 .sidebar {
-  width: 175px;
+  width: 200px;
   height: 100vh;
-  background: #2b2b2b; /* Dark gray */
+  background: #2b2b2b; 
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -39,27 +9,34 @@
   position: fixed;
   top: 0;
   left: 0;
+  font-family: "Arial", sans-serif; /* Unify font */
 }
 
+/* Sidebar links */
 .sidebar a {
   color: #fff;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1.5rem;
-  margin-bottom: 6rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s;
 }
 
+.sidebar a:hover {
+  color: #d15800; /* Keep the existing orange hover */
+}
+
+/* Specific link overrides (if needed) */
 .sidebar a.dashboardLink {
-  margin-top: 4rem;
-  margin-bottom: 1rem;
-  display: block;
+  margin-top: 7rem;
 }
 
 .sidebar a.completedTasksLink,
 .sidebar a.assignedTasksLink {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
+/* Priority button & dropdown */
 .priorityButton {
   background: none;
   border: none;
@@ -68,6 +45,8 @@
   padding: 0;
   font-size: 1rem;
   cursor: pointer;
+  margin-bottom: 1rem;
+  transition: color 0.2s;
 }
 
 .priorityButton:hover {
@@ -83,19 +62,28 @@
   cursor: pointer;
   margin-bottom: 0.5rem;
   color: #fff;
+  font-size: 1rem;
 }
 
 .priorityDropdown div:hover {
   color: #d15800;
 }
 
+/* The sign-out button at the bottom */
 .signOutButton {
   margin-top: auto;
-  margin-bottom: auto;
+  margin-bottom: 4rem;
   background: #fff;
   color: #2b2b2b;
   border: none;
   border-radius: 4px;
   padding: 0.5rem 1rem;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.signOutButton:hover {
+  background: #d15800;
+  color: #fff;
 }
