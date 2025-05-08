@@ -166,3 +166,43 @@
 .overdueTaskCard button:hover {
   background: #b34700;
 }
+
+/* Search Bar Styles */
+.searchBar {
+  width: 550px;
+  max-width: 100%;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #444343;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.searchBar:focus {
+  border: 1.5px solid #d15800;
+}
+
+.filterSection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  align-items: center;
+}
+
+.filterSelect {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #444343;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.filterSelect:focus {
+  border: 1.5px solid #d15800;
+}

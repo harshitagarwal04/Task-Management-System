@@ -62,9 +62,53 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem;;
+  display: inline-block;
 }
 
 .addTaskButton:hover {
   background-color: #b34700; /* Slightly darker on hover */
+}
+
+/* Search Bar Styles */
+.searchBar {
+  width: 550px;
+  max-width: 100%;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  margin-right: 1rem; /* Add space to the right of the search bar */
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #444343;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  padding-right: 2rem;
+  display: inline-block; /* Allow search bar and button to be inline */
+}
+
+.searchBar:focus {
+  border: 1.5px solid #d15800;
+}
+
+.filterSection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  align-items: center;
+}
+
+.filterSelect {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #444343;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.filterSelect:focus {
+  border: 1.5px solid #d15800;
 }

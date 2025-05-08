@@ -15,6 +15,10 @@ const AssignedTasks = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [priorityFilter, setPriorityFilter] = useState('');
+  const [dueDateFilter, setDueDateFilter] = useState('');
 
   // Fetch the current user's ID
   useEffect(() => {
@@ -111,6 +115,17 @@ const AssignedTasks = () => {
     }
   };
 
+  // Filter tasks by search and filters
+  const filteredTasks = tasks.filter((task) => {
+    const matchesSearch =
+      task.title.toLowerCase().includes(search.toLowerCase()) ||
+      task.description.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus = statusFilter ? task.status === statusFilter : true;
+    const matchesPriority = priorityFilter ? task.priority === priorityFilter : true;
+    const matchesDueDate = dueDateFilter ? task.dueDate.slice(0, 10) === dueDateFilter : true;
+    return matchesSearch && matchesStatus && matchesPriority && matchesDueDate;
+  });
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -120,14 +135,53 @@ const AssignedTasks = () => {
       </div>
       <main className={styles.assignedTasksMain}>
         <h1>Assigned Tasks</h1>
-        <button
-          className={styles.addTaskButton}
-          onClick={() => setShowAddModal(true)}
-        >
-          + Add Task
-        </button>
+        {/* Filter Section */}
+        <div className={styles.filterSection}>
+          <select
+            value={statusFilter}
+            onChange={e => setStatusFilter(e.target.value)}
+            className={styles.filterSelect}
+          >
+            <option value="">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="in progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+          <select
+            value={priorityFilter}
+            onChange={e => setPriorityFilter(e.target.value)}
+            className={styles.filterSelect}
+          >
+            <option value="">All Priorities</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <input
+            type="date"
+            value={dueDateFilter}
+            onChange={e => setDueDateFilter(e.target.value)}
+            className={styles.filterSelect}
+          />
+        </div>
+        {/* Search Bar and Add Task */}
+        <div>
+          <input
+            type="text"
+            placeholder="Search tasks by title or description..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className={styles.searchBar}
+          />
+          <button
+            className={styles.addTaskButton}
+            onClick={() => setShowAddModal(true)}
+          >
+            + Add Task
+          </button>
+        </div>
         <TaskList
-          tasks={tasks}
+          tasks={filteredTasks}
           onDelete={handleDelete}
           onMarkComplete={handleMarkComplete}
           onUpdate={handleUpdate}

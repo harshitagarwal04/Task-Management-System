@@ -12,6 +12,10 @@ const Dashboard = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [priorityFilter, setPriorityFilter] = useState('');
+  const [dueDateFilter, setDueDateFilter] = useState('');
 
   useEffect(() => {
     const loadTasks = async () => {
@@ -71,12 +75,25 @@ const Dashboard = () => {
   // Filter overdue tasks (not completed, due date in the past)
   const now = new Date();
   const overdueTasks = tasks.filter(
-    (task) => task.status !== 'completed' && new Date(task.dueDate) < now
+    (task) =>
+      task.status !== 'completed' &&
+      new Date(task.dueDate) < now &&
+      (task.title.toLowerCase().includes(search.toLowerCase()) ||
+        task.description.toLowerCase().includes(search.toLowerCase())) &&
+      (statusFilter ? task.status === statusFilter : true) &&
+      (priorityFilter ? task.priority === priorityFilter : true) &&
+      (dueDateFilter ? task.dueDate.slice(0, 10) === dueDateFilter : true)
   );
 
-  // Filter non-overdue tasks
+  // Filter non-overdue tasks and by search/filters
   const nonOverdueTasks = tasks.filter(
-    (task) => !(task.status !== 'completed' && new Date(task.dueDate) < now)
+    (task) =>
+      !(task.status !== 'completed' && new Date(task.dueDate) < now) &&
+      (task.title.toLowerCase().includes(search.toLowerCase()) ||
+        task.description.toLowerCase().includes(search.toLowerCase())) &&
+      (statusFilter ? task.status === statusFilter : true) &&
+      (priorityFilter ? task.priority === priorityFilter : true) &&
+      (dueDateFilter ? task.dueDate.slice(0, 10) === dueDateFilter : true)
   );
 
   if (loading) return <div>Loading...</div>;
@@ -87,6 +104,45 @@ const Dashboard = () => {
         <Sidebar />
       </div>
       <main className={styles.mainContent}>
+        {/* Filter Section */}
+        <div className={styles.filterSection}>
+          <select
+            value={statusFilter}
+            onChange={e => setStatusFilter(e.target.value)}
+            className={styles.filterSelect}
+          >
+            <option value="">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="in progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+          <select
+            value={priorityFilter}
+            onChange={e => setPriorityFilter(e.target.value)}
+            className={styles.filterSelect}
+          >
+            <option value="">All Priorities</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <input
+            type="date"
+            value={dueDateFilter}
+            onChange={e => setDueDateFilter(e.target.value)}
+            className={styles.filterSelect}
+          />
+        </div>
+
+        {/* Search Bar */}
+        <input
+          type="text"
+          placeholder="Search tasks by title or description..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className={styles.searchBar}
+        />
+
         {/* Overdue Tasks Section */}
         {overdueTasks.length > 0 && (
           <section className={styles.overdueSection}>
