@@ -27,7 +27,7 @@ const Sidebar: React.FC = () => {
         Completed Tasks
       </a>
       <a href="/tasks/assigned" className={`${styles.assignedTasksLink}`}>
-        Assigned Tasks
+        Tasks Assigned
       </a>
       <div>
         <button
